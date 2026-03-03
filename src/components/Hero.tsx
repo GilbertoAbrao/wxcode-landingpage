@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
 function AnimatedCounter({
   value,
@@ -27,6 +28,8 @@ function AnimatedCounter({
 }
 
 export default function Hero() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen overflow-hidden pt-32 pb-20">
       {/* Background effects */}
@@ -47,7 +50,7 @@ export default function Hero() {
           >
             <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-cyan">
               <span className="h-2 w-2 animate-pulse rounded-full bg-cyan" />
-              Plataforma de Modernização com IA
+              {t("hero.badge")}
             </span>
           </motion.div>
 
@@ -58,9 +61,9 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mb-6 max-w-5xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            O Passaporte Definitivo para a{" "}
-            <span className="gradient-text">Modernização</span> do seu Legado{" "}
-            <span className="gradient-text">WinDev</span>
+            {t("hero.headlinePre")}{" "}
+            <span className="gradient-text">{t("hero.headlineHighlight1")}</span> {t("hero.headlineMid")}{" "}
+            <span className="gradient-text">{t("hero.headlineHighlight2")}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -70,12 +73,12 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mb-10 max-w-2xl text-lg text-muted sm:text-xl"
           >
-            Um desenvolvedor.{" "}
-            <span className="font-semibold text-cyan">42x mais produtivo</span>.
-            Transforme{" "}
-            <span className="font-semibold text-purple">3 anos de projeto</span>{" "}
-            em{" "}
-            <span className="font-semibold text-foreground">6 meses</span>.
+            {t("hero.subtitleDev")}{" "}
+            <span className="font-semibold text-cyan">{t("hero.subtitle42x")}</span>.{" "}
+            {t("hero.subtitleTransform")}{" "}
+            <span className="font-semibold text-purple">{t("hero.subtitle3years")}</span>{" "}
+            {t("hero.subtitleIn")}{" "}
+            <span className="font-semibold text-foreground">{t("hero.subtitle6months")}</span>.
           </motion.p>
 
           {/* CTAs */}
@@ -89,7 +92,7 @@ export default function Hero() {
               href="#contato"
               className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan to-purple px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan/25"
             >
-              Solicite uma Demonstração
+              {t("hero.ctaDemo")}
               <ArrowRight
                 size={18}
                 className="transition-transform duration-200 group-hover:translate-x-1"
@@ -100,7 +103,7 @@ export default function Hero() {
               className="glass group flex cursor-pointer items-center justify-center gap-2 rounded-xl px-8 py-4 text-base font-semibold text-foreground transition-all duration-200 hover:bg-white/10"
             >
               <Play size={18} className="text-cyan" />
-              Veja Como Funciona
+              {t("hero.ctaHow")}
             </a>
           </motion.div>
 
@@ -112,10 +115,10 @@ export default function Hero() {
             className="grid w-full max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4"
           >
             {[
-              { value: "42x", label: "Mais produtivo" },
-              { value: "6", label: "Meses de projeto", suffix: " meses" },
-              { value: "1", label: "Desenvolvedor", suffix: " dev" },
-              { value: "2000+", label: "Testes automáticos" },
+              { value: "42x", label: t("hero.stat1Label") },
+              { value: "6", label: t("hero.stat2Label"), suffix: " meses" },
+              { value: "1", label: t("hero.stat3Label"), suffix: " dev" },
+              { value: "2000+", label: t("hero.stat4Label") },
             ].map((stat, i) => (
               <div
                 key={i}
@@ -141,15 +144,15 @@ export default function Hero() {
             <div className="glass-strong relative overflow-hidden rounded-2xl p-6 sm:p-8">
               <div className="scanline relative flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
                 {[
-                  { icon: "{ }", label: "Código WinDev", color: "text-muted" },
+                  { icon: "{ }", label: t("hero.pipeline1"), color: "text-muted" },
                   { icon: "→", label: "", color: "text-cyan/50" },
-                  { icon: "KB", label: "Knowledge Base", color: "text-cyan" },
+                  { icon: "KB", label: t("hero.pipeline2"), color: "text-cyan" },
                   { icon: "→", label: "", color: "text-cyan/50" },
-                  { icon: "AI", label: "Conversão IA", color: "text-purple" },
+                  { icon: "AI", label: t("hero.pipeline3"), color: "text-purple" },
                   { icon: "→", label: "", color: "text-purple/50" },
                   {
                     icon: "</>",
-                    label: "Código Moderno",
+                    label: t("hero.pipeline4"),
                     color: "text-green-400",
                   },
                 ].map((step, i) =>

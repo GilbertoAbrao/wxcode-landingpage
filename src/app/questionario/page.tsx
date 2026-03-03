@@ -10,96 +10,89 @@ import {
   CheckCircle,
   CircleDot,
 } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
-const questions = [
+interface QuestionDef {
+  id: string;
+  labelKey: string;
+  type: "single" | "multi";
+  options: { value: string; optKey: string; points: number }[];
+}
+
+const questionDefs: QuestionDef[] = [
   {
     id: "team_size",
-    label: "Quantos desenvolvedores trabalham no legado WinDev hoje?",
-    type: "single" as const,
+    labelKey: "questionnaire.q1Label",
+    type: "single",
     options: [
-      { value: "1-2", label: "1 a 2 desenvolvedores", points: 1 },
-      { value: "3-5", label: "3 a 5 desenvolvedores", points: 2 },
-      { value: "6-10", label: "6 a 10 desenvolvedores", points: 3 },
-      { value: "10+", label: "Mais de 10 desenvolvedores", points: 4 },
+      { value: "1-2", optKey: "questionnaire.q1Opt1", points: 1 },
+      { value: "3-5", optKey: "questionnaire.q1Opt2", points: 2 },
+      { value: "6-10", optKey: "questionnaire.q1Opt3", points: 3 },
+      { value: "10+", optKey: "questionnaire.q1Opt4", points: 4 },
     ],
   },
   {
     id: "codebase_size",
-    label: "Qual o tamanho aproximado da base de código WinDev?",
-    type: "single" as const,
+    labelKey: "questionnaire.q2Label",
+    type: "single",
     options: [
-      { value: "small", label: "Até 50 telas/janelas", points: 1 },
-      { value: "medium", label: "50 a 200 telas/janelas", points: 2 },
-      { value: "large", label: "200 a 500 telas/janelas", points: 3 },
-      { value: "enterprise", label: "Mais de 500 telas/janelas", points: 4 },
+      { value: "small", optKey: "questionnaire.q2Opt1", points: 1 },
+      { value: "medium", optKey: "questionnaire.q2Opt2", points: 2 },
+      { value: "large", optKey: "questionnaire.q2Opt3", points: 3 },
+      { value: "enterprise", optKey: "questionnaire.q2Opt4", points: 4 },
     ],
   },
   {
     id: "urgency",
-    label: "Qual a urgência da modernização?",
-    type: "single" as const,
+    labelKey: "questionnaire.q3Label",
+    type: "single",
     options: [
-      {
-        value: "exploring",
-        label: "Estou explorando possibilidades",
-        points: 1,
-      },
-      {
-        value: "planning",
-        label: "Planejando para os próximos 6-12 meses",
-        points: 2,
-      },
-      {
-        value: "decided",
-        label: "Já decidimos modernizar, buscando parceiro",
-        points: 4,
-      },
-      {
-        value: "urgent",
-        label: "Urgente — temos deadline ou pressão de negócio",
-        points: 5,
-      },
+      { value: "exploring", optKey: "questionnaire.q3Opt1", points: 1 },
+      { value: "planning", optKey: "questionnaire.q3Opt2", points: 2 },
+      { value: "decided", optKey: "questionnaire.q3Opt3", points: 4 },
+      { value: "urgent", optKey: "questionnaire.q3Opt4", points: 5 },
     ],
   },
   {
     id: "pain",
-    label: "Quais dores você mais sente com o legado? (marque todas que se aplicam)",
-    type: "multi" as const,
+    labelKey: "questionnaire.q4Label",
+    type: "multi",
     options: [
-      { value: "cost", label: "Custo alto de manutenção", points: 1 },
-      { value: "talent", label: "Dificuldade de encontrar devs WinDev", points: 1 },
-      { value: "docs", label: "Falta de documentação", points: 1 },
-      { value: "risk", label: "Risco de perder conhecimento (aposentadoria, turnover)", points: 2 },
-      { value: "speed", label: "Lentidão para entregar novas funcionalidades", points: 1 },
-      { value: "integration", label: "Dificuldade de integração com sistemas modernos", points: 1 },
+      { value: "cost", optKey: "questionnaire.q4Opt1", points: 1 },
+      { value: "talent", optKey: "questionnaire.q4Opt2", points: 1 },
+      { value: "docs", optKey: "questionnaire.q4Opt3", points: 1 },
+      { value: "risk", optKey: "questionnaire.q4Opt4", points: 2 },
+      { value: "speed", optKey: "questionnaire.q4Opt5", points: 1 },
+      { value: "integration", optKey: "questionnaire.q4Opt6", points: 1 },
     ],
   },
   {
     id: "decision_role",
-    label: "Qual seu papel na decisão de modernização?",
-    type: "single" as const,
+    labelKey: "questionnaire.q5Label",
+    type: "single",
     options: [
-      { value: "evaluator", label: "Estou avaliando para recomendar", points: 1 },
-      { value: "influencer", label: "Influencio a decisão técnica", points: 2 },
-      { value: "decision_maker", label: "Sou o decisor ou co-decisor", points: 4 },
-      { value: "budget_owner", label: "Tenho autonomia de orçamento", points: 5 },
+      { value: "evaluator", optKey: "questionnaire.q5Opt1", points: 1 },
+      { value: "influencer", optKey: "questionnaire.q5Opt2", points: 2 },
+      { value: "decision_maker", optKey: "questionnaire.q5Opt3", points: 4 },
+      { value: "budget_owner", optKey: "questionnaire.q5Opt4", points: 5 },
     ],
   },
   {
     id: "previous_attempts",
-    label: "Já tentaram modernizar o legado antes?",
-    type: "single" as const,
+    labelKey: "questionnaire.q6Label",
+    type: "single",
     options: [
-      { value: "no", label: "Não, é a primeira vez que avaliamos", points: 1 },
-      { value: "evaluated", label: "Avaliamos opções mas não iniciamos", points: 2 },
-      { value: "failed", label: "Sim, mas o projeto falhou ou foi abandonado", points: 4 },
-      { value: "partial", label: "Sim, temos uma migração parcial em andamento", points: 3 },
+      { value: "no", optKey: "questionnaire.q6Opt1", points: 1 },
+      { value: "evaluated", optKey: "questionnaire.q6Opt2", points: 2 },
+      { value: "failed", optKey: "questionnaire.q6Opt3", points: 4 },
+      { value: "partial", optKey: "questionnaire.q6Opt4", points: 3 },
     ],
   },
 ];
 
 function QuestionnaireContent() {
   const searchParams = useSearchParams();
+  const { t } = useTranslation();
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -111,8 +104,8 @@ function QuestionnaireContent() {
     role: searchParams.get("role") || "",
   };
 
-  const question = questions[current];
-  const progress = ((current + 1) / questions.length) * 100;
+  const question = questionDefs[current];
+  const progress = ((current + 1) / questionDefs.length) * 100;
 
   function selectSingle(value: string) {
     setAnswers((prev) => ({ ...prev, [question.id]: value }));
@@ -136,7 +129,7 @@ function QuestionnaireContent() {
   }
 
   function handleNext() {
-    if (current < questions.length - 1) {
+    if (current < questionDefs.length - 1) {
       setCurrent((prev) => prev + 1);
     } else {
       handleSubmit();
@@ -144,9 +137,8 @@ function QuestionnaireContent() {
   }
 
   function handleSubmit() {
-    // Calculate lead score
     let score = 0;
-    for (const q of questions) {
+    for (const q of questionDefs) {
       const answer = answers[q.id];
       if (!answer) continue;
       if (Array.isArray(answer)) {
@@ -180,22 +172,21 @@ function QuestionnaireContent() {
             </div>
           </div>
           <h2 className="mb-3 text-2xl font-bold">
-            Obrigado, {contactData.name.split(" ")[0]}!
+            {t("questionnaire.successTitle").replace("{name}", contactData.name.split(" ")[0])}
           </h2>
           <p className="mb-6 text-muted">
-            Recebemos suas informações e já estamos preparando uma análise
-            personalizada para a{" "}
+            {t("questionnaire.successBody1")}{" "}
             <span className="font-medium text-foreground">
               {contactData.company}
             </span>
-            . Nossa equipe entrará em contato em até 24 horas pelo e-mail{" "}
+            {t("questionnaire.successBody2")}{" "}
             <span className="font-medium text-cyan">{contactData.email}</span>.
           </p>
           <a
             href="/"
             className="group inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-cyan to-purple px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan/25"
           >
-            Voltar ao site
+            {t("questionnaire.successBack")}
             <ArrowRight
               size={16}
               className="transition-transform duration-200 group-hover:translate-x-1"
@@ -221,11 +212,11 @@ function QuestionnaireContent() {
           />
         </a>
         <h1 className="mb-2 text-2xl font-bold sm:text-3xl">
-          Conte-nos sobre seu <span className="gradient-text">cenário</span>
+          {t("questionnaire.headerTitle")} <span className="gradient-text">{t("questionnaire.headerHighlight")}</span>
         </h1>
         <p className="text-sm text-muted">
-          {questions.length} perguntas rápidas para prepararmos sua análise
-          personalizada.
+          {t("questionnaire.headerSubtitle")
+            .replace("{count}", String(questionDefs.length))}
         </p>
       </div>
 
@@ -233,7 +224,9 @@ function QuestionnaireContent() {
       <div className="mb-8 w-full max-w-xl">
         <div className="mb-2 flex justify-between text-xs text-muted">
           <span>
-            Pergunta {current + 1} de {questions.length}
+            {t("questionnaire.progressLabel")
+              .replace("{current}", String(current + 1))
+              .replace("{total}", String(questionDefs.length))}
           </span>
           <span>{Math.round(progress)}%</span>
         </div>
@@ -258,7 +251,7 @@ function QuestionnaireContent() {
             transition={{ duration: 0.3 }}
             className="glass-strong rounded-2xl p-8"
           >
-            <h2 className="mb-6 text-lg font-semibold">{question.label}</h2>
+            <h2 className="mb-6 text-lg font-semibold">{t(question.labelKey)}</h2>
 
             <div className="space-y-3">
               {question.options.map((option) => {
@@ -290,7 +283,7 @@ function QuestionnaireContent() {
                         isSelected ? "text-cyan" : "text-white/20"
                       }`}
                     />
-                    {option.label}
+                    {t(option.optKey)}
                   </button>
                 );
               })}
@@ -307,7 +300,7 @@ function QuestionnaireContent() {
             className="flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-muted transition-colors duration-200 hover:text-foreground disabled:cursor-default disabled:opacity-30"
           >
             <ArrowLeft size={16} />
-            Anterior
+            {t("questionnaire.navBack")}
           </button>
 
           <button
@@ -316,7 +309,7 @@ function QuestionnaireContent() {
             disabled={!canAdvance()}
             className="flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-cyan to-purple px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan/25 disabled:cursor-default disabled:opacity-30"
           >
-            {current === questions.length - 1 ? "Enviar" : "Próxima"}
+            {current === questionDefs.length - 1 ? t("questionnaire.navSubmit") : t("questionnaire.navNext")}
             <ArrowRight size={16} />
           </button>
         </div>

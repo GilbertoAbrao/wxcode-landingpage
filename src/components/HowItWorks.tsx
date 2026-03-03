@@ -8,67 +8,49 @@ import {
   ShieldCheck,
   ChevronRight,
 } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
-const steps = [
-  {
-    number: "01",
-    icon: Upload,
-    title: "Importação Inteligente",
-    description:
-      "Importe seu projeto WinDev/WebDev completo: código planificado (ZIP), PDFs de documentação, SQL DDL e Stored Procedures.",
-    details: [
-      "Wizard com sessão rastreável",
-      "Progresso em tempo real",
-      "Retomada após falhas",
-      "Workspace isolado por projeto",
-    ],
-    color: "cyan",
-  },
-  {
-    number: "02",
-    icon: Brain,
-    title: "Construção da KB",
-    description:
-      "Uma base de conhecimento inteligente é construída automaticamente, criando o gêmeo cognitivo do seu legado.",
-    details: [
-      "Parsing por domínio especializado",
-      "Grafo de dependências completo",
-      "Extração de regras de negócio",
-      "Diagramas automáticos (Mermaid)",
-    ],
-    color: "cyan",
-  },
-  {
-    number: "03",
-    icon: Code2,
-    title: "Conversão com IA",
-    description:
-      "Agentes especializados geram código moderno usando 61 ferramentas MCP e todo o contexto da Knowledge Base.",
-    details: [
-      "Multi-stack (FastAPI, SPA, Full-stack)",
-      "3 opções de UI disponíveis",
-      "Agentes por papel (análise, execução)",
-      "Código limpo e manutenível",
-    ],
-    color: "purple",
-  },
-  {
-    number: "04",
-    icon: ShieldCheck,
-    title: "Qualidade Assegurada",
-    description:
-      "Validação determinística em camadas garante que cada regra de negócio seja preservada na conversão.",
-    details: [
-      "2000+ testes unitários automáticos",
-      "Verificação por milestone",
-      "Governança auditável de regras",
-      "Live View para stakeholders",
-    ],
-    color: "green",
-  },
-];
+const stepIcons = [Upload, Brain, Code2, ShieldCheck];
+const stepColors = ["cyan", "cyan", "purple", "green"] as const;
 
 export default function HowItWorks() {
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      number: "01",
+      icon: stepIcons[0],
+      title: t("how.step1Title"),
+      description: t("how.step1Desc"),
+      details: [t("how.step1Detail1"), t("how.step1Detail2"), t("how.step1Detail3"), t("how.step1Detail4")],
+      color: stepColors[0],
+    },
+    {
+      number: "02",
+      icon: stepIcons[1],
+      title: t("how.step2Title"),
+      description: t("how.step2Desc"),
+      details: [t("how.step2Detail1"), t("how.step2Detail2"), t("how.step2Detail3"), t("how.step2Detail4")],
+      color: stepColors[1],
+    },
+    {
+      number: "03",
+      icon: stepIcons[2],
+      title: t("how.step3Title"),
+      description: t("how.step3Desc"),
+      details: [t("how.step3Detail1"), t("how.step3Detail2"), t("how.step3Detail3"), t("how.step3Detail4")],
+      color: stepColors[2],
+    },
+    {
+      number: "04",
+      icon: stepIcons[3],
+      title: t("how.step4Title"),
+      description: t("how.step4Desc"),
+      details: [t("how.step4Detail1"), t("how.step4Detail2"), t("how.step4Detail3"), t("how.step4Detail4")],
+      color: stepColors[3],
+    },
+  ];
+
   return (
     <section id="como-funciona" className="relative py-24">
       <div className="pointer-events-none absolute inset-0">
@@ -84,14 +66,13 @@ export default function HowItWorks() {
           className="mb-16 text-center"
         >
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-cyan">
-            Pipeline
+            {t("how.sectionLabel")}
           </span>
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-            Como <span className="gradient-text">Funciona</span>
+            {t("how.heading")} <span className="gradient-text">{t("how.headingHighlight")}</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            Um pipeline em 4 passos que transforma seu legado em código moderno
-            com qualidade garantida.
+            {t("how.subheading")}
           </p>
         </motion.div>
 

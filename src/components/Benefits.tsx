@@ -9,53 +9,22 @@ import {
   Users,
   Lightbulb,
 } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
-const benefits = [
-  {
-    icon: BookOpen,
-    title: "Independência de Conhecimento",
-    description:
-      'Elimine a dependência dos "heróis tecnológicos". A KB extrai regras de negócio automaticamente e qualquer pessoa pode consultar via agente RAG.',
-    highlight: "Democratize o conhecimento",
-  },
-  {
-    icon: Database,
-    title: "Ativo de Conhecimento Vivo",
-    description:
-      "A KB documenta um legado que nunca teve documentação. Regras de negócio, workflows, diagramas e notas de conversão — tudo organizado e pesquisável.",
-    highlight: "Legado finalmente documentado",
-  },
-  {
-    icon: Shield,
-    title: "Redução de Riscos",
-    description:
-      "Testes determinísticos, verificação por milestone e governança auditável. Decisão consciente sobre débitos técnicos, não surpresas.",
-    highlight: "Validação em camadas",
-  },
-  {
-    icon: Zap,
-    title: "Agilidade Tecnológica",
-    description:
-      "Liberdade de escolha de stack sem aprisionamento. Equipe focada em inovação, não manutenção de legado.",
-    highlight: "Liberdade de stack",
-  },
-  {
-    icon: Users,
-    title: "Atração de Talentos",
-    description:
-      "Stacks modernas atraem e retêm os melhores profissionais. Abandone a dificuldade de contratar especialistas WinDev.",
-    highlight: "Equipe motivada",
-  },
-  {
-    icon: Lightbulb,
-    title: "Curva de Produtividade Crescente",
-    description:
-      "Cada tela convertida enriquece a KB e acelera a próxima. Metodologia bottom-up com dependências resolvidas progressivamente.",
-    highlight: "Cada passo acelera o próximo",
-  },
-];
+const benefitIcons = [BookOpen, Database, Shield, Zap, Users, Lightbulb];
 
 export default function Benefits() {
+  const { t } = useTranslation();
+
+  const benefits = [
+    { icon: benefitIcons[0], title: t("benefits.title1"), description: t("benefits.desc1"), highlight: t("benefits.highlight1") },
+    { icon: benefitIcons[1], title: t("benefits.title2"), description: t("benefits.desc2"), highlight: t("benefits.highlight2") },
+    { icon: benefitIcons[2], title: t("benefits.title3"), description: t("benefits.desc3"), highlight: t("benefits.highlight3") },
+    { icon: benefitIcons[3], title: t("benefits.title4"), description: t("benefits.desc4"), highlight: t("benefits.highlight4") },
+    { icon: benefitIcons[4], title: t("benefits.title5"), description: t("benefits.desc5"), highlight: t("benefits.highlight5") },
+    { icon: benefitIcons[5], title: t("benefits.title6"), description: t("benefits.desc6"), highlight: t("benefits.highlight6") },
+  ];
+
   return (
     <section id="beneficios" className="relative py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -67,14 +36,13 @@ export default function Benefits() {
           className="mb-16 text-center"
         >
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-cyan">
-            Valor Estratégico
+            {t("benefits.sectionLabel")}
           </span>
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-            Além da <span className="gradient-text">Produtividade</span>
+            {t("benefits.heading")} <span className="gradient-text">{t("benefits.headingHighlight")}</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            O WXCode não apenas converte código. Ele transforma o conhecimento
-            do seu legado em ativo estratégico.
+            {t("benefits.subheading")}
           </p>
         </motion.div>
 

@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslation } from "@/i18n";
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="border-t border-white/5 py-12">
       <div className="mx-auto max-w-7xl px-6">
@@ -19,12 +22,12 @@ export default function Footer() {
 
           <nav className="flex flex-wrap justify-center gap-6">
             {[
-              { label: "Como Funciona", href: "#como-funciona" },
-              { label: "Benefícios", href: "#beneficios" },
-              { label: "ROI", href: "#roi" },
-              { label: "Plataforma", href: "#plataforma" },
-              { label: "Test Drive", href: "#precos" },
-              { label: "Contato", href: "#contato" },
+              { label: t("footer.howItWorks"), href: "#como-funciona" },
+              { label: t("footer.benefits"), href: "#beneficios" },
+              { label: t("footer.roi"), href: "#roi" },
+              { label: t("footer.platform"), href: "#plataforma" },
+              { label: t("footer.testDrive"), href: "#precos" },
+              { label: t("footer.contact"), href: "#contato" },
             ].map((link) => (
               <a
                 key={link.href}
@@ -37,8 +40,7 @@ export default function Footer() {
           </nav>
 
           <p className="text-xs text-muted/50">
-            &copy; {new Date().getFullYear()} WXCode. Todos os direitos
-            reservados.
+            &copy; {new Date().getFullYear()} {t("footer.copyright")}
           </p>
         </div>
       </div>

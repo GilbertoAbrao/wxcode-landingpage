@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
 export default function Contact() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -40,15 +42,13 @@ export default function Contact() {
           className="mb-16 text-center"
         >
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-cyan">
-            Contato
+            {t("contact.sectionLabel")}
           </span>
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-            Pronto para <span className="gradient-text">Modernizar</span>?
+            {t("contact.heading")} <span className="gradient-text">{t("contact.headingHighlight")}</span>?
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            Preencha seus dados e em seguida responda algumas perguntas rápidas
-            para que possamos preparar uma análise personalizada para o seu
-            cenário.
+            {t("contact.subheading")}
           </p>
         </motion.div>
 
@@ -66,7 +66,7 @@ export default function Contact() {
                   htmlFor="name"
                   className="mb-2 block text-sm font-medium"
                 >
-                  Nome
+                  {t("contact.nameLabel")}
                 </label>
                 <input
                   type="text"
@@ -74,7 +74,7 @@ export default function Contact() {
                   name="name"
                   required
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground outline-none transition-colors duration-200 placeholder:text-muted/50 focus:border-cyan/50 focus:ring-1 focus:ring-cyan/25"
-                  placeholder="Seu nome"
+                  placeholder={t("contact.namePlaceholder")}
                 />
               </div>
               <div>
@@ -82,7 +82,7 @@ export default function Contact() {
                   htmlFor="email"
                   className="mb-2 block text-sm font-medium"
                 >
-                  E-mail corporativo
+                  {t("contact.emailLabel")}
                 </label>
                 <input
                   type="email"
@@ -90,7 +90,7 @@ export default function Contact() {
                   name="email"
                   required
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground outline-none transition-colors duration-200 placeholder:text-muted/50 focus:border-cyan/50 focus:ring-1 focus:ring-cyan/25"
-                  placeholder="seu@empresa.com"
+                  placeholder={t("contact.emailPlaceholder")}
                 />
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function Contact() {
                   htmlFor="company"
                   className="mb-2 block text-sm font-medium"
                 >
-                  Empresa
+                  {t("contact.companyLabel")}
                 </label>
                 <input
                   type="text"
@@ -109,7 +109,7 @@ export default function Contact() {
                   name="company"
                   required
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground outline-none transition-colors duration-200 placeholder:text-muted/50 focus:border-cyan/50 focus:ring-1 focus:ring-cyan/25"
-                  placeholder="Nome da empresa"
+                  placeholder={t("contact.companyPlaceholder")}
                 />
               </div>
               <div>
@@ -117,7 +117,7 @@ export default function Contact() {
                   htmlFor="role"
                   className="mb-2 block text-sm font-medium"
                 >
-                  Cargo
+                  {t("contact.roleLabel")}
                 </label>
                 <input
                   type="text"
@@ -125,7 +125,7 @@ export default function Contact() {
                   name="role"
                   required
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-foreground outline-none transition-colors duration-200 placeholder:text-muted/50 focus:border-cyan/50 focus:ring-1 focus:ring-cyan/25"
-                  placeholder="Seu cargo"
+                  placeholder={t("contact.rolePlaceholder")}
                 />
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function Contact() {
               disabled={submitting}
               className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan to-purple px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan/25 disabled:opacity-50"
             >
-              {submitting ? "Redirecionando..." : "Continuar"}
+              {submitting ? t("contact.submitLoading") : t("contact.submitDefault")}
               <Send
                 size={18}
                 className="transition-transform duration-200 group-hover:translate-x-1"
@@ -143,8 +143,7 @@ export default function Contact() {
             </button>
 
             <p className="text-center text-xs text-muted/50">
-              Ao continuar, você será direcionado para um breve questionário de
-              qualificação.
+              {t("contact.notice")}
             </p>
           </form>
         </motion.div>

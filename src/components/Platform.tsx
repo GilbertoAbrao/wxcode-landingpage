@@ -8,55 +8,40 @@ import {
   RefreshCw,
   ChevronRight,
 } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
-const pillars = [
-  {
-    icon: Factory,
-    title: "Output Projects",
-    description:
-      "Fábrica de modernização por produto, com ambientes gerenciáveis e entrega por milestones de negócio.",
-    features: [
-      "Identidade isolada por produto",
-      "Ambiente pronto para CI/CD",
-      "Milestones de negócio objetivos",
-    ],
-  },
-  {
-    icon: Bot,
-    title: "Botfy Coder",
-    description:
-      "Orquestrador de conversão com método estruturado, automação com governança e checkpoints de qualidade.",
-    features: [
-      "Agentes especializados por papel",
-      "Fluxo padronizado de decisão",
-      "Checkpoints a cada milestone",
-    ],
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Cockpit Unificado",
-    description:
-      "Observabilidade executiva com dashboards de progresso e comunicação clara para liderança.",
-    features: [
-      "Dashboards em tempo real",
-      "Visibilidade para executivos",
-      "Métricas de cobertura de regras",
-    ],
-  },
-  {
-    icon: RefreshCw,
-    title: "Operação Contínua",
-    description:
-      "Retomada após interrupções, replanejamento sem perder histórico e cadência sustentável de entrega.",
-    features: [
-      "Retomada de contexto completa",
-      "Replanejamento sem perda",
-      "Cadência sustentável",
-    ],
-  },
-];
+const pillarIcons = [Factory, Bot, LayoutDashboard, RefreshCw];
 
 export default function Platform() {
+  const { t } = useTranslation();
+
+  const pillars = [
+    {
+      icon: pillarIcons[0],
+      title: t("platform.pillar1Title"),
+      description: t("platform.pillar1Desc"),
+      features: [t("platform.pillar1Feature1"), t("platform.pillar1Feature2"), t("platform.pillar1Feature3")],
+    },
+    {
+      icon: pillarIcons[1],
+      title: t("platform.pillar2Title"),
+      description: t("platform.pillar2Desc"),
+      features: [t("platform.pillar2Feature1"), t("platform.pillar2Feature2"), t("platform.pillar2Feature3")],
+    },
+    {
+      icon: pillarIcons[2],
+      title: t("platform.pillar3Title"),
+      description: t("platform.pillar3Desc"),
+      features: [t("platform.pillar3Feature1"), t("platform.pillar3Feature2"), t("platform.pillar3Feature3")],
+    },
+    {
+      icon: pillarIcons[3],
+      title: t("platform.pillar4Title"),
+      description: t("platform.pillar4Desc"),
+      features: [t("platform.pillar4Feature1"), t("platform.pillar4Feature2"), t("platform.pillar4Feature3")],
+    },
+  ];
+
   return (
     <section id="plataforma" className="relative py-24">
       <div className="pointer-events-none absolute inset-0">
@@ -73,14 +58,13 @@ export default function Platform() {
           className="mb-16 text-center"
         >
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-cyan">
-            Arquitetura
+            {t("platform.sectionLabel")}
           </span>
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-            <span className="gradient-text">Plataforma</span>, não Ferramenta
+            <span className="gradient-text">{t("platform.headingHighlight")}</span>{t("platform.headingSuffix")}
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            WXCode industrializa a modernização de legado com método, velocidade,
-            governança e entrega contínua de valor.
+            {t("platform.subheading")}
           </p>
         </motion.div>
 

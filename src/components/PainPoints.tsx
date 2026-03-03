@@ -8,41 +8,21 @@ import {
   FileQuestion,
   AlertTriangle,
 } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
-const pains = [
-  {
-    icon: DollarSign,
-    title: "Custo Exorbitante",
-    description:
-      "Equipes grandes mantendo código que ninguém domina completamente. Orçamentos que só crescem.",
-  },
-  {
-    icon: Users,
-    title: "Escassez de Talentos",
-    description:
-      "Cada vez mais difícil encontrar desenvolvedores WinDev. O mercado está secando.",
-  },
-  {
-    icon: Lock,
-    title: "Aprisionamento Tecnológico",
-    description:
-      "Preso a um ecossistema sem evolução. Sem acesso a novas tecnologias e integrações modernas.",
-  },
-  {
-    icon: FileQuestion,
-    title: "Falta de Documentação",
-    description:
-      'O conhecimento existe só na cabeça de poucos especialistas — os "heróis tecnológicos".',
-  },
-  {
-    icon: AlertTriangle,
-    title: "Migrações que Falham",
-    description:
-      "Projetos de migração que estouram orçamento, prazo, ou são abandonados completamente.",
-  },
-];
+const painIcons = [DollarSign, Users, Lock, FileQuestion, AlertTriangle];
 
 export default function PainPoints() {
+  const { t } = useTranslation();
+
+  const pains = [
+    { icon: painIcons[0], title: t("pain.title1"), description: t("pain.desc1") },
+    { icon: painIcons[1], title: t("pain.title2"), description: t("pain.desc2") },
+    { icon: painIcons[2], title: t("pain.title3"), description: t("pain.desc3") },
+    { icon: painIcons[3], title: t("pain.title4"), description: t("pain.desc4") },
+    { icon: painIcons[4], title: t("pain.title5"), description: t("pain.desc5") },
+  ];
+
   return (
     <section className="relative py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -54,11 +34,10 @@ export default function PainPoints() {
           className="mb-16 text-center"
         >
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-            Você conhece <span className="gradient-text">essa dor</span>
+            {t("pain.heading")} <span className="gradient-text">{t("pain.headingHighlight")}</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            Manter um legado WinDev é caro, arriscado e insustentável.
-            Você não está sozinho.
+            {t("pain.subheading")}
           </p>
         </motion.div>
 

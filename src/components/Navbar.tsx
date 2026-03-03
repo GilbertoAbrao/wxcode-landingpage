@@ -4,18 +4,21 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { label: "Como Funciona", href: "#como-funciona" },
-  { label: "Benefícios", href: "#beneficios" },
-  { label: "ROI", href: "#roi" },
-  { label: "Plataforma", href: "#plataforma" },
-  { label: "Test Drive", href: "#precos" },
-];
+import { useTranslation } from "@/i18n";
+import LanguageSelector from "./LanguageSelector";
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinks = [
+    { label: t("nav.howItWorks"), href: "#como-funciona" },
+    { label: t("nav.benefits"), href: "#beneficios" },
+    { label: t("nav.roi"), href: "#roi" },
+    { label: t("nav.platform"), href: "#plataforma" },
+    { label: t("nav.testDrive"), href: "#precos" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -56,21 +59,25 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <LanguageSelector />
           <a
             href="#contato"
             className="cursor-pointer rounded-xl bg-gradient-to-r from-cyan to-purple px-5 py-2.5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
           >
-            Fale Conosco
+            {t("nav.cta")}
           </a>
         </div>
 
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="cursor-pointer text-foreground md:hidden"
-          aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSelector />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="cursor-pointer text-foreground"
+            aria-label={mobileOpen ? t("nav.closeMenu") : t("nav.openMenu")}
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -97,7 +104,7 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="cursor-pointer rounded-xl bg-gradient-to-r from-cyan to-purple px-5 py-2.5 text-center text-sm font-semibold text-white"
               >
-                Fale Conosco
+                {t("nav.cta")}
               </a>
             </div>
           </motion.div>

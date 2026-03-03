@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -40,11 +41,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={`${dmSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

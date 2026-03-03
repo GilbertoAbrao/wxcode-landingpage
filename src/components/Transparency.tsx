@@ -2,35 +2,40 @@
 
 import { motion } from "framer-motion";
 import { Eye, Layers, Thermometer, CheckCircle } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
-const challenges = [
-  {
-    icon: Layers,
-    challenge: "Idempotência e Duplicidade",
-    description: "LLMs podem gerar a mesma informação com nomes diferentes.",
-    solution: "Deduplicação em camadas — determinística + semântica.",
-  },
-  {
-    icon: Eye,
-    challenge: "Gestão de Contexto",
-    description: "Janelas de contexto limitadas para projetos grandes.",
-    solution: "KB + MCP Server + 61 ferramentas especializadas.",
-  },
-  {
-    icon: Thermometer,
-    challenge: "Variação nas Respostas",
-    description: "Cada execução pode gerar resultados diferentes.",
-    solution: "KB como fonte de verdade + estabilização via MCP.",
-  },
-  {
-    icon: CheckCircle,
-    challenge: "Código Imperfeito",
-    description: "Saídas de LLM precisam de verificação.",
-    solution: "Geração massiva de testes + verificação por milestone.",
-  },
-];
+const challengeIcons = [Layers, Eye, Thermometer, CheckCircle];
 
 export default function Transparency() {
+  const { t } = useTranslation();
+
+  const challenges = [
+    {
+      icon: challengeIcons[0],
+      challenge: t("transparency.challenge1"),
+      description: t("transparency.desc1"),
+      solution: t("transparency.solution1"),
+    },
+    {
+      icon: challengeIcons[1],
+      challenge: t("transparency.challenge2"),
+      description: t("transparency.desc2"),
+      solution: t("transparency.solution2"),
+    },
+    {
+      icon: challengeIcons[2],
+      challenge: t("transparency.challenge3"),
+      description: t("transparency.desc3"),
+      solution: t("transparency.solution3"),
+    },
+    {
+      icon: challengeIcons[3],
+      challenge: t("transparency.challenge4"),
+      description: t("transparency.desc4"),
+      solution: t("transparency.solution4"),
+    },
+  ];
+
   return (
     <section className="relative py-24">
       <div className="pointer-events-none absolute inset-0">
@@ -46,14 +51,13 @@ export default function Transparency() {
           className="mb-16 text-center"
         >
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-purple">
-            Diferencial de Credibilidade
+            {t("transparency.sectionLabel")}
           </span>
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-            Transparência <span className="gradient-text">Técnica</span>
+            {t("transparency.heading")} <span className="gradient-text">{t("transparency.headingHighlight")}</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            Nenhum concorrente fala abertamente sobre os desafios da IA.
-            Nós falamos — e mostramos como resolvemos cada um.
+            {t("transparency.subheading")}
           </p>
         </motion.div>
 
@@ -76,13 +80,13 @@ export default function Transparency() {
               <div className="space-y-3">
                 <div className="rounded-lg bg-red-500/5 p-3">
                   <p className="text-sm text-red-400/80">
-                    <span className="font-medium">Desafio:</span>{" "}
+                    <span className="font-medium">{t("transparency.challengeLabel")}</span>{" "}
                     {item.description}
                   </p>
                 </div>
                 <div className="rounded-lg bg-green-400/5 p-3">
                   <p className="text-sm text-green-400/80">
-                    <span className="font-medium">Solução:</span>{" "}
+                    <span className="font-medium">{t("transparency.solutionLabel")}</span>{" "}
                     {item.solution}
                   </p>
                 </div>
@@ -99,10 +103,9 @@ export default function Transparency() {
           className="glass-strong mt-8 rounded-2xl p-6 text-center"
         >
           <p className="text-sm text-muted">
-            <span className="font-semibold text-foreground">Resultado:</span>{" "}
-            Saída controlada, validada por testes determinísticos e verificação
-            por milestone. IA probabilística com{" "}
-            <span className="text-cyan">resultados determinísticos</span>.
+            <span className="font-semibold text-foreground">{t("transparency.resultLabel")}</span>{" "}
+            {t("transparency.resultText")}{" "}
+            <span className="text-cyan">{t("transparency.resultHighlight")}</span>.
           </p>
         </motion.div>
       </div>

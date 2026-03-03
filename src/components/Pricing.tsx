@@ -9,44 +9,29 @@ import {
   Eye,
   HandshakeIcon,
 } from "lucide-react";
+import { useTranslation } from "@/i18n";
 
-const steps = [
-  {
-    icon: Clock,
-    title: "30 dias com seu projeto real",
-    description:
-      "Selecionamos uma amostra representativa do seu legado e executamos a conversão completa — com a mesma qualidade do projeto final.",
-  },
-  {
-    icon: Eye,
-    title: "Você acompanha tudo",
-    description:
-      "Acesso ao cockpit com dashboards de progresso, KB gerada, regras de negócio extraídas e código convertido em tempo real.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Resultado mensurável",
-    description:
-      "Ao final, você recebe um relatório completo: código funcional, testes automatizados, KB parcial e métricas de ROI reais do seu cenário.",
-  },
-  {
-    icon: HandshakeIcon,
-    title: "Decisão sem pressão",
-    description:
-      "Se o resultado falar por si, seguimos juntos. Se não, você fica com todo o conhecimento gerado. Sem contrato, sem compromisso.",
-  },
-];
-
-const includes = [
-  "Conversão de amostra real do seu projeto",
-  "Knowledge Base parcial gerada",
-  "Regras de negócio extraídas e documentadas",
-  "Testes unitários automáticos",
-  "Relatório de ROI com dados reais",
-  "Suporte dedicado durante os 30 dias",
-];
+const stepIcons = [Clock, Eye, ShieldCheck, HandshakeIcon];
 
 export default function Pricing() {
+  const { t } = useTranslation();
+
+  const steps = [
+    { icon: stepIcons[0], title: t("pricing.step1Title"), description: t("pricing.step1Desc") },
+    { icon: stepIcons[1], title: t("pricing.step2Title"), description: t("pricing.step2Desc") },
+    { icon: stepIcons[2], title: t("pricing.step3Title"), description: t("pricing.step3Desc") },
+    { icon: stepIcons[3], title: t("pricing.step4Title"), description: t("pricing.step4Desc") },
+  ];
+
+  const includes = [
+    t("pricing.include1"),
+    t("pricing.include2"),
+    t("pricing.include3"),
+    t("pricing.include4"),
+    t("pricing.include5"),
+    t("pricing.include6"),
+  ];
+
   return (
     <section id="precos" className="relative py-24">
       <div className="pointer-events-none absolute inset-0">
@@ -62,16 +47,14 @@ export default function Pricing() {
           className="mb-16 text-center"
         >
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-cyan">
-            Test Drive
+            {t("pricing.sectionLabel")}
           </span>
           <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
-            <span className="gradient-text">30 dias</span> para você ter
-            certeza
+            <span className="gradient-text">{t("pricing.headingHighlight")}</span>{" "}
+            {t("pricing.headingSuffix")}
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            Nenhuma promessa substitui ver o resultado com seus próprios olhos.
-            Por isso, oferecemos um PoC de 30 dias com seu projeto real — sem
-            compromisso de contratação.
+            {t("pricing.subheading")}
           </p>
         </motion.div>
 
@@ -108,10 +91,10 @@ export default function Pricing() {
           <div className="grid gap-8 p-8 lg:grid-cols-2 lg:p-12">
             <div>
               <h3 className="mb-2 text-2xl font-bold">
-                O que está incluso no PoC
+                {t("pricing.includedTitle")}
               </h3>
               <p className="mb-6 text-sm text-muted">
-                Tudo o que você precisa para avaliar o WXCode com confiança.
+                {t("pricing.includedSubtitle")}
               </p>
               <ul className="space-y-3">
                 {includes.map((item, i) => (
@@ -128,22 +111,22 @@ export default function Pricing() {
 
             <div className="flex flex-col items-center justify-center rounded-2xl bg-white/5 p-8 text-center">
               <div className="mb-2 text-5xl font-bold text-cyan">30</div>
-              <div className="mb-1 text-lg font-semibold">dias de teste</div>
+              <div className="mb-1 text-lg font-semibold">{t("pricing.ctaDays")}</div>
               <p className="mb-6 text-sm text-muted">
-                com seu projeto real, sem compromisso
+                {t("pricing.ctaSublabel")}
               </p>
               <a
                 href="#contato"
                 className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan to-purple px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan/25"
               >
-                Solicitar meu Test Drive
+                {t("pricing.ctaButton")}
                 <ArrowRight
                   size={18}
                   className="transition-transform duration-200 group-hover:translate-x-1"
                 />
               </a>
               <p className="mt-4 text-xs text-muted/60">
-                Sem contrato. Sem cartão de crédito. Sem letra miúda.
+                {t("pricing.ctaDisclaimer")}
               </p>
             </div>
           </div>
