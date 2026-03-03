@@ -2,7 +2,7 @@ export type Locale = "pt" | "en" | "fr" | "es";
 
 export const LOCALES: Locale[] = ["pt", "en", "fr", "es"];
 
-export const DEFAULT_LOCALE: Locale = "pt";
+export const DEFAULT_LOCALE: Locale = "en";
 
 export const LOCALE_LABELS: Record<Locale, string> = {
   pt: "Português",

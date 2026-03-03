@@ -20,16 +20,6 @@ const translations: Record<Locale, Record<string, string>> = { pt, en, fr, es };
 
 const STORAGE_KEY = "wxcode-locale";
 
-function detectBrowserLocale(): Locale {
-  if (typeof navigator === "undefined") return DEFAULT_LOCALE;
-  const langs = navigator.languages ?? [navigator.language];
-  for (const lang of langs) {
-    const code = lang.split("-")[0].toLowerCase();
-    if (LOCALES.includes(code as Locale)) return code as Locale;
-  }
-  return DEFAULT_LOCALE;
-}
-
 type TranslateFunction = (key: string) => string;
 
 interface LanguageContextValue {
@@ -48,8 +38,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
     if (stored && LOCALES.includes(stored)) {
       setLocaleState(stored);
-    } else {
-      setLocaleState(detectBrowserLocale());
     }
     setMounted(true);
   }, []);
