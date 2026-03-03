@@ -112,11 +112,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="grid w-full max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4"
+            className="grid w-full max-w-3xl grid-cols-3 gap-4"
           >
             {[
               { value: "42x", label: t("hero.stat1Label") },
-              { value: "6", label: t("hero.stat2Label"), suffix: " meses" },
               { value: "1", label: t("hero.stat3Label"), suffix: " dev" },
               { value: "2000+", label: t("hero.stat4Label") },
             ].map((stat, i) => (
