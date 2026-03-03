@@ -136,7 +136,7 @@ function QuestionnaireContent() {
     }
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     let score = 0;
     for (const q of questionDefs) {
       const answer = answers[q.id];
@@ -152,8 +152,13 @@ function QuestionnaireContent() {
       }
     }
 
-    // TODO: send to API
-    console.log("Lead data:", { contact: contactData, answers, score });
+    // Fire-and-forget: failure does not block the user
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contact: contactData, answers, score }),
+    }).catch(() => {});
+
     setSubmitted(true);
   }
 
