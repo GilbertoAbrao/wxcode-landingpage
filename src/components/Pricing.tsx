@@ -125,9 +125,11 @@ export default function Pricing() {
                   className="transition-transform duration-200 group-hover:translate-x-1"
                 />
               </a>
-              <p className="mt-4 text-xs text-muted/60">
-                {t("pricing.ctaDisclaimer")}
-              </p>
+              {t("pricing.ctaDisclaimer") && (
+                <p className="mt-4 text-xs text-muted/60">
+                  {t("pricing.ctaDisclaimer")}
+                </p>
+              )}
             </div>
           </div>
         </motion.div>
