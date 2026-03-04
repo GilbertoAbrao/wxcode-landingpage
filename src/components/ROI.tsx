@@ -131,7 +131,7 @@ export default function ROI() {
             className="glass glow-purple rounded-2xl p-8 text-center"
           >
             <div className="mb-2 text-5xl font-bold text-purple sm:text-6xl">
-              <AnimatedNumber target={97} suffix="%" locale={locale} />
+              <AnimatedNumber target={100} suffix="%" locale={locale} />
             </div>
             <p className="text-sm text-muted">{t("roi.stat2Label")}</p>
           </motion.div>

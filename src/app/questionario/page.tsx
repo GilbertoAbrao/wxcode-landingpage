@@ -109,6 +109,8 @@ function QuestionnaireContent() {
 
   function selectSingle(value: string) {
     setAnswers((prev) => ({ ...prev, [question.id]: value }));
+    // Auto-advance after a short delay so the user sees the selection
+    setTimeout(() => handleNext(), 300);
   }
 
   function toggleMulti(value: string) {
